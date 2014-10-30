@@ -157,10 +157,54 @@ class ReportesController extends AppController{
             $datos = array();
             $datos['title']['text'] = $query_search['Reporte']['titulo'];
             $datos['subtitle']['text'] = $query_search['Reporte']['subtitulo'];
+            $datos['yAxis']['labels']['enabled'] = false;
+            $datos['yAxis']['title']['text'] = '';
+            $datos['yAxis']['gridLineWidth'] = 0;
+            $datos['xAxis']['labels']['enabled'] = false;
+            //$datos['xAxis']['categories'] = array('');
+            $datos['xAxis']['title']['text'] = '';
+            $datos['xAxis']['gridLineWidth'] = 0;
             $datos['options']['chart']['type'] = $query_search['Reporte']['tipo_grafico'];
-            $datos['ayuda'] = $query_search['Reporte']['ayuda'];
-            $datos['yAxis']['title']['text'] = $query_search['Reporte']['y_titulo'];
-            $datos['series'] = $series;
+            
+            // Pequeños Contribuyentes
+            $dataClases[0]['from'] = 0;
+            $dataClases[0]['to'] = 50;
+            $dataClases[0]['name'] = 'Pequeños';
+            $dataClases[0]['color'] = '#8A0808';
+
+            // Medianos Contribuyentes
+            $dataClases[1]['from'] = 50;
+            $dataClases[1]['to'] = 100;
+            $dataClases[1]['name'] = 'Medianos';
+            $dataClases[1]['color'] = '#FACC2E';
+
+            // Grandes Contribuyentes
+            $dataClases[2]['from'] = 100;
+            $dataClases[2]['to'] = 1000;
+            $dataClases[2]['name'] = 'Grandes';
+            $dataClases[2]['color'] = '#088A29';
+
+            $datos['options']['colorAxis']['dataClasses'] = $dataClases;
+            
+//            $datos['options']['colorAxis']['stops'] = array(array('0','#8A0808'),array('0.5','#FACC2E'),array('1','#088A29'));
+            //$datos['options']['legend']['layout'] = 'vertical';
+            //$datos['options']['legend']['align'] = 'left';
+            //$datos['options']['legend']['verticalAlign'] = 'bottom';
+            $datos['options']['legend']['reversed'] = true;
+
+            $datos['options']['mapNavigation']['enabled'] = true;
+            $datos['options']['mapNavigation']['enableButtons'] = false;
+            //$datos['options']['mapNavigation']['buttonOptions']['verticalAlign'] = 'bottom';
+            //$datos['ayuda'] = $query_search['Reporte']['ayuda'];
+            //$datos['yAxis']['title']['text'] = $query_search['Reporte']['y_titulo'];            
+            $datos['series'][0]['data'] = $series;
+            $datos['series'][0]['name'] = $query_search['Reporte']['y_titulo'];
+            $datos['series'][0]['states']['hover']['color'] = '#BADA55';
+            $datos['series'][0]['data'] = $series;
+            $datos['series'][0]['dataLabels']['enabled'] = true;
+            $datos['series'][0]['dataLabels']['format'] = '{point.name}';
+            $datos['size']['width'] = 220;
+            $datos['size']['height'] = 400;
       elseif(strcmp($query_search['Reporte']['tipo_grafico'],'cuadro') == 0):
             $series = array();
             // Envia la dimension tiempo en un array

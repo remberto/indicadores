@@ -68,7 +68,6 @@ graficasController.controller('graficasController', ['$scope','GestionesFactory'
 
     // Variable de Dashboard
     $scope.padron = null;
-    $scope.propiedades = null;
     $scope.recaudacion = null;
     $scope.deuda = null;
     // Variables de Graficas
@@ -84,33 +83,89 @@ graficasController.controller('graficasController', ['$scope','GestionesFactory'
     };
     $scope.gridDeuda = {
         enableFiltering: false
-    };
-     
+    };     
+    
     // Funciones
     $scope.selectGestion = function(reportePadronId, reporteRecaudacionId, reporteDeudaId, gestionId){
 	ReporteFactory.query({id: 4, gestion: gestionId},function(data){$scope.padron = data.datos});
-        ReporteFactory.query({id: 5, gestion: gestionId},function(data){$scope.propiedades = data.datos});
         ReporteFactory.query({id: 6, gestion: gestionId},function(data){$scope.recaudacion = data.datos});
         ReporteFactory.query({id: 7, gestion: gestionId},function(data){$scope.deuda = data.datos});
 
-	ReporteFactory.query({id: reportePadronId, gestion: gestionId},function(data){$scope.chartPadron = data.datos});
-	ReporteFactory.query({id: reporteRecaudacionId, gestion: gestionId},function(data){$scope.chartRecaudacion = data.datos});
-        ReporteFactory.query({id: reporteDeudaId, gestion: gestionId},function(data){$scope.chartDeuda = data.datos});
+	ReporteFactory.query({id: reportePadronId, gestion: gestionId},
+			     function(data){$scope.chartPadron = data.datos;
+					    if($scope.chartPadron.options.chart.type == 'map'){				     
+						//console.log($scope.chartDeuda.series[0]);
+						$scope.chartPadron.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+						//console.log(Highcharts.maps['municipio/altagracia']);
+						$scope.chartPadron.series[0].joinBy = ['descripcio','hc-key'];
+					    };
+					   });
+	ReporteFactory.query({id: reporteRecaudacionId, gestion: gestionId},
+			     function(data){$scope.chartRecaudacion = data.datos;
+					    if($scope.chartRecaudacion.options.chart.type == 'map'){				     
+						//console.log($scope.chartDeuda.series[0]);
+						$scope.chartRecaudacion.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+						//console.log(Highcharts.maps['municipio/altagracia']);
+						$scope.chartRecaudacion.series[0].joinBy = ['descripcio','hc-key'];
+					    };
+					   });
+        ReporteFactory.query({id: reporteDeudaId, gestion: gestionId},
+			     function(data){$scope.chartDeuda = data.datos;
+					    if($scope.chartDeuda.options.chart.type == 'map'){
+				     
+						//console.log($scope.chartDeuda.series[0]);
+						$scope.chartDeuda.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+						//console.log(Highcharts.maps['municipio/altagracia']);
+						$scope.chartDeuda.series[0].joinBy = ['descripcio','hc-key'];
+					    };
+					   });
     }
 
     $scope.selectReportePadron = function(reporteId, gestionId){
-	ReporteFactory.query({id: reporteId, gestion: gestionId},function(data){$scope.chartPadron = data.datos});
+	ReporteFactory.query({id: reporteId, gestion: gestionId},
+			     function(data){
+				 $scope.chartPadron = data.datos;
+				 if($scope.chartPadron.options.chart.type == 'map'){
+				     
+				     //console.log($scope.chartDeuda.series[0]);
+				     $scope.chartPadron.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+				     //console.log(Highcharts.maps['municipio/altagracia']);
+				     $scope.chartPadron.series[0].joinBy = ['descripcio','hc-key'];
+				 };
+			     });
 	TableFactory.query({id: reporteId}, function(data){$scope.gridPadron.data = data.datos});
     };
 
 
     $scope.selectReporteRecaudacion = function(reporteId, gestionId){
-	ReporteFactory.query({id: reporteId, gestion: gestionId},function(data){$scope.chartRecaudacion = data.datos});
+	ReporteFactory.query({id: reporteId, gestion: gestionId},
+			     function(data){
+				 $scope.chartRecaudacion = data.datos;
+				 if($scope.chartRecaudacion.options.chart.type == 'map'){
+				     
+				     //console.log($scope.chartDeuda.series[0]);
+				     $scope.chartRecaudacion.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+				     //console.log(Highcharts.maps['municipio/altagracia']);
+				     $scope.chartRecaudacion.series[0].joinBy = ['descripcio','hc-key'];
+				 };
+			     });
 	TableFactory.query({id: reporteId}, function(data){$scope.gridRecaudacion.data = data.datos});
     };
 
     $scope.selectReporteDeuda = function(reporteId, gestionId){
-	ReporteFactory.query({id: reporteId, gestion: gestionId},function(data){$scope.chartDeuda = data.datos});
+	ReporteFactory.query({id: reporteId, gestion: gestionId},
+			     function(data){
+				 $scope.chartDeuda = null;
+				 $scope.chartDeuda = data.datos;
+				 if($scope.chartDeuda.options.chart.type == 'map'){
+				     
+				     //console.log($scope.chartDeuda.series[0]);
+				     $scope.chartDeuda.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+				     //console.log(Highcharts.maps['municipio/altagracia']);
+				     $scope.chartDeuda.series[0].joinBy = ['descripcio','hc-key'];
+				 };
+			     }
+			    );
 	TableFactory.query({id: reporteId}, function(data){$scope.gridDeuda.data = data.datos});
     };
 
@@ -123,13 +178,44 @@ graficasController.controller('graficasController', ['$scope','GestionesFactory'
     ReportesFactory.query({id: 3},function(data){$scope.reportes_deuda = data.reportes; $scope.reporte_deuda = $scope.reportes_deuda[0];});
     // Dashboard
     ReporteFactory.query({id: 4, gestion: 2014},function(data){$scope.padron = data.datos});
-    ReporteFactory.query({id: 5, gestion: 2014},function(data){$scope.propiedades = data.datos});
     ReporteFactory.query({id: 6, gestion: 2014},function(data){$scope.recaudacion = data.datos});
     ReporteFactory.query({id: 7, gestion: 2014},function(data){$scope.deuda = data.datos});
     // Graficas
-    ReporteFactory.query({id: 3, gestion: 2014},function(data){$scope.chartPadron = data.datos});
-    ReporteFactory.query({id: 8, gestion: 2014},function(data){$scope.chartRecaudacion = data.datos});
-    ReporteFactory.query({id: 9, gestion: 2014},function(data){$scope.chartDeuda = data.datos});
+
+    ReporteFactory.query({id: 3, gestion: 2014},
+			 function(data){
+			     $scope.chartPadron = data.datos;
+			     if($scope.chartPadron.options.chart.type == 'map'){
+				 $scope.chartPadron.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+				  //console.log(Highcharts.maps['municipio/altagracia']);
+				 $scope.chartPadron.series[0].joinBy = ['descripcio','hc-key'];
+				 };
+			 });
+    ReporteFactory.query({id: 13, gestion: 2014},
+			 function(data){
+			     $scope.chartRecaudacion = data.datos;
+			     if($scope.chartRecaudacion.options.chart.type == 'map'){
+				     
+				     //console.log($scope.chartDeuda.series[0]);
+				     $scope.chartRecaudacion.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+				     //console.log(Highcharts.maps['municipio/altagracia']);
+				     $scope.chartRecaudacion.series[0].joinBy = ['descripcio','hc-key'];
+				 };
+			 });
+    ReporteFactory.query({id: 9, gestion: 2014},
+			 function(data){
+			     $scope.chartDeuda = data.datos;
+			     if($scope.chartDeuda.options.chart.type == 'map'){
+				     
+				     //console.log($scope.chartDeuda.series[0]);
+				     $scope.chartDeuda.series[0].mapData = Highcharts.maps['municipio/altagracia'];
+				     //console.log(Highcharts.maps['municipio/altagracia']);
+				     $scope.chartDeuda.series[0].joinBy = ['descripcio','hc-key'];
+				 };
+			 }
+			);
+    
+
     // Tables
     TableFactory.query({id: 3}, function(data){$scope.gridPadron.data = data.datos});
     TableFactory.query({id: 8}, function(data){$scope.gridRecaudacion.data = data.datos});

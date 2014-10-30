@@ -1677,3 +1677,37 @@ Stack Trace:
 #11 D:\desarrollo\indicadores\indicadores\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #12 D:\desarrollo\indicadores\indicadores\index.php(41): require('D:\\desarrollo\\i...')
 #13 {main}
+2014-10-30 08:30:58 Error: [PDOException] SQLSTATE[HY000]: General error: 1 no such table: datawarehouse.dim_geografico
+Request URL: /index.php/reportes/13.json
+Stack Trace:
+#0 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(456): PDO->prepare('SELECT ?  dataw...', Array)
+#1 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT ?  dataw...', Array)
+#2 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT ?  dataw...', Array, Array)
+#3 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('SELECT ?  dataw...')
+#4 [internal function]: DboSource->query('SELECT ?  dataw...')
+#5 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /home/remberto/Proyectos/indicadores/app/Controller/ReportesController.php(72): Model->query('SELECT ?  dataw...')
+#7 [internal function]: ReportesController->view('13')
+#8 /home/remberto/Proyectos/indicadores/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ReportesController), Array)
+#9 /home/remberto/Proyectos/indicadores/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /home/remberto/Proyectos/indicadores/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ReportesController), Object(CakeRequest))
+#11 /home/remberto/Proyectos/indicadores/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 /home/remberto/Proyectos/indicadores/index.php(41): require('/home/remberto/...')
+#13 {main}
+2014-10-30 14:54:20 Error: [PDOException] SQLSTATE[HY000]: General error: 1 near "GROUP": syntax error
+Request URL: /index.php/reportes/13.json
+Stack Trace:
+#0 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(456): PDO->prepare('SELECT ?  dim_z...', Array)
+#1 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('SELECT ?  dim_z...', Array)
+#2 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(666): DboSource->execute('SELECT ?  dim_z...', Array, Array)
+#3 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Datasource/DboSource.php(537): DboSource->fetchAll('SELECT ?  dim_z...')
+#4 [internal function]: DboSource->query('SELECT ?  dim_z...')
+#5 /home/remberto/Proyectos/indicadores/lib/Cake/Model/Model.php(3354): call_user_func_array(Array, Array)
+#6 /home/remberto/Proyectos/indicadores/app/Controller/ReportesController.php(72): Model->query('SELECT ?  dim_z...')
+#7 [internal function]: ReportesController->view('13')
+#8 /home/remberto/Proyectos/indicadores/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ReportesController), Array)
+#9 /home/remberto/Proyectos/indicadores/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#10 /home/remberto/Proyectos/indicadores/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(ReportesController), Object(CakeRequest))
+#11 /home/remberto/Proyectos/indicadores/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 /home/remberto/Proyectos/indicadores/index.php(41): require('/home/remberto/...')
+#13 {main}
