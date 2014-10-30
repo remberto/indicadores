@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="imagees/png" href="img/logo-icg.png">
+
+    <title>Indicadores</title>
+    <!--
+
+    -->
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="js/highchart/highcharts.src.js"></script>
+    <script type="text/javascript" src="js/highchart/modules/map.js"></script>
+    <script src="js/map/ag-all.js"></script> 
+</head>
+
+<body>
+
+    <div>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.jsp">Indicadores</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <!--
+	    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i>Cuadros de Mando</a>
+                    </li>
+                    <li>
+                        <a href="visor.jsp"><i class="fa fa-fw fa-bar-chart-o"></i> Visor </a>
+                    </li>
+                </ul>
+            </div>
+	    -->
+            <!-- /.navbar-collapse -->
+        </nav>
+		
+		<!-- Graficos -->
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Cuadros de Mando <small>Estadisticas</small>
+                        </h1>
+                        
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div id="nro_contribuyentes" class="huge"></div>
+                                        <div>Nro. de Contribuyentes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver Detalles</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-home fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div id="nro_propiedades" class="huge"></div>
+                                        <div>Nro. de Propiedades</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver Detalles</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-dollar fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div id="monto_recaudado" class="huge"></div>
+                                        <div>Monto Recaudado</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver Detalles</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-info-circle fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div id="nro_deudores" class="huge"></div>
+                                        <div>Contribuyentes Deudores</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver Detalles</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Graficas</h3>
+                            </div>
+                            <div class="panel-body">
+                              <div class="col-lg-4">
+				<div class="form-group">
+				  <h3>Padr&oacute;n</h3>
+				  <label>Gesti&oacute;n</label>
+				  <select id="contribuyentes_gestion" class="form-control">
+				    <option value="2000">2000</option>
+				    <option value="2001">2001</option>
+				    <option value="2002">2002</option>
+				    <option value="2003">2003</option>
+				    <option value="2004">2004</option>
+				    <option value="2005">2005</option>
+				    <option value="2006">2006</option>
+				    <option value="2007">2007</option>
+				    <option value="2008">2008</option>
+				    <option value="2009">2009</option>
+				    <option value="2010">2010</option>
+				    <option value="2011">2011</option>
+				    <option value="2012">2012</option>
+				    <option value="2013" selected>2013</option>
+				    <option value="2014">2014</option>				       
+				  </select>
+				</div>
+				<div id="contribuyentes" style="width=100%; height=400px;" ></div>
+				<table id="padron" class="display" cellspacing="0" width="100%">
+		                    <thead>
+				      <tr>
+					<th></th>
+					<th>2010</th>
+					<th>2011</th>
+					<th>2012</th>
+					<th>2013</th>
+					<th>2014</th>
+				      </tr>
+				    </thead>
+		    
+				    <tfoot>
+				      <tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				      </tr>
+				    </tfoot>
+                                </table>
+			      </div>
+			      <div class="col-lg-4">
+				<div class="form-group">
+				  <h3>Recaudaci&oacute;n</h3>
+				  <label>Gesti&oacute;n</label>
+				  <select id="contribuyentes_importancia_gestion" class="form-control">
+				    <option value="2000">2000</option>
+				    <option value="2001">2001</option>
+				    <option value="2002">2002</option>
+				    <option value="2003">2003</option>
+				    <option value="2004">2004</option>
+				    <option value="2005">2005</option>
+				    <option value="2006">2006</option>
+				    <option value="2007">2007</option>
+				    <option value="2008">2008</option>
+				    <option value="2009">2009</option>
+				    <option value="2010">2010</option>
+				    <option value="2011">2011</option>
+				    <option value="2012">2012</option>
+				    <option value="2013" selected>2013</option>
+				    <option value="2014">2014</option>				       
+				  </select>
+				</div>
+				<div id="contribuyentes_importancia" style="width=100%; height=400px;" ></div>
+                                  <table id="recaudacion" class="display" cellspacing="0" width="100%">
+		                    <thead>
+				      <tr>
+					<th></th>
+					<th>2010</th>
+					<th>2011</th>
+					<th>2012</th>
+					<th>2013</th>
+					<th>2014</th>
+				      </tr>
+				    </thead>
+		    
+				    <tfoot>
+				      <tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				      </tr>
+				    </tfoot>
+				  </table>
+			      </div>
+			      <div class="col-lg-4">
+				<div class="form-group">
+				  <h3>Deudas</h3>
+				  <label>Gest&oacute;n</label>
+				  <select id="contribuyentes_por_tipo_gestion" class="form-control">
+				    <option value="2000">2000</option>
+				    <option value="2001">2001</option>
+				    <option value="2002">2002</option>
+				    <option value="2003">2003</option>
+				    <option value="2004">2004</option>
+				    <option value="2005">2005</option>
+				    <option value="2006">2006</option>
+				    <option value="2007">2007</option>
+				    <option value="2008">2008</option>
+				    <option value="2009">2009</option>
+				    <option value="2010">2010</option>
+				    <option value="2011">2011</option>
+				    <option value="2012">2012</option>
+				    <option value="2013" selected>2013</option>
+				    <option value="2014">2014</option>				       
+				  </select>
+				</div>
+				
+				<div id="contribuyentes_por_tipo" style="width=100%; height=400px;" ></div>
+				<table id="deuda" class="display" cellspacing="0" width="100%">
+		                    <thead>
+				      <tr>
+					<th></th>
+					<th>2010</th>
+					<th>2011</th>
+					<th>2012</th>
+					<th>2013</th>
+					<th>2014</th>
+				      </tr>
+				    </thead>
+		    
+				    <tfoot>
+				      <tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				      </tr>
+				    </tfoot>
+                                </table>
+			      </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+</body>
+</html>
+<script>
+jQuery(document).ready(function() {
+    var url = 'json/padron.json';
+    
+    // Cuadros de Cabecera
+    $.getJSON(url,{})
+      .done(function(data){
+        console.log(data);
+        $('#nro_contribuyentes').html(data.datos.contribuyentes);
+        $('#nro_propiedades').html(data.datos.propiedades);
+        $('#monto_recaudado').html(data.datos.recaudado);
+        $('#nro_deudores').html(data.datos.deudores);
+      })
+      .fail(function(jqxhr, textStatus, error){
+        var err = textStatus + ", " + error;
+        console.log( "Request Failed: " + err );
+      });
+    // Grafica
+       loadGrafica('json/contribuyentes.json',
+                   $("#contribuyentes_gestion" ).val(),
+                   'contribuyentes');
+       loadGrafica('json/contribuyentes_importancia.json',
+                   $( "#contribuyentes_importancia_gestion" ).val(),
+                   'contribuyentes_importancia');
+       loadGrafica('json/mapa.json',
+                   $("#contribuyentes_por_tipo_gestion" ).val(),
+                   'contribuyentes_por_tipo');
+
+       $("#contribuyentes_gestion").on('change', function(e){
+          loadGrafica('json/contribuyentes.json',
+                      $("#contribuyente_gestion" ).val(),
+                      'contribuyentes');
+       });
+       $("#contribuyentes_importancia_gestion").on('change', function(e){
+          loadGrafica('json/contribuyentes.json',
+                      $("#contribuyentes_importancia_gestion" ).val(),
+                      'contribuyentes_importancia');
+       });
+       $("#contribuyentes_por_tipo_gestion").on('change', function(e){
+          loadGrafica('json/mapa.json',
+                      $("#contribuyentes_por_tipo_gestion" ).val(),
+                      'contribuyentes_por_tipo');
+       });
+
+       $('#padron').dataTable({
+           "ajax": "json/array.txt"
+         });
+       $('#recaudacion').dataTable({
+           "ajax": "json/array.txt"
+         });
+       $('#deuda').dataTable({
+           "ajax": "json/array.txt"
+         });
+       
+});
+
+function loadGrafica(url,param_gestion, render){
+//    $.getJSON(url, {gestion: param_gestion})
+      $.getJSON(url, {})
+      .done(function(data) {
+        if(data.datos.tipo_grafico == 'line' || 
+           data.datos.tipo_grafico == 'bar' ||
+           data.datos.tipo_grafico == 'column'){
+           graficarDatos(data,render);
+        }
+        if(data.datos.tipo_grafico == 'pie'){
+           graficarPieDatos(data,render);
+        }
+        if(data.datos.tipo_grafico == 'map'){
+           graficarMap(data,render);
+        }
+
+      })
+      .fail(function( jqxhr, textStatus, error ) {
+        var err = textStatus + ", " + error;
+        console.log( "Request Failed: " + err );
+      });
+};
+
+function graficarDatos(data, render){
+    var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: render,
+                type: data['datos']['tipo_grafico']
+            },
+            title: {
+                text: data['datos']['titulo']
+            },
+            subtitle: {
+                  text: data['datos']['subtitulo'] 
+            },
+            xAxis: {
+                title: {
+                    text: data['datos']['x_titulo']
+                },
+                categories: data['datos']['categorias']
+            },
+            yAxis: {
+                title: {
+                    text: data['datos']['y_titulo']
+                },
+                plotLines: [{
+                        value: 0,
+                        width: 0.25,
+                        color: '#808080'
+                }]
+            },
+            series: data['datos']['series']
+        });
+};
+
+function graficaDatosPie(data, render){
+    var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: render,
+                type: data['datos']['tipo_grafico'],
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: data['datos']['titulo'] 
+            },
+            subtitle: {
+                  text: mineral
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '{point.percentage:.1f} %'
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                    type: 'pie',
+                    name: data['datos']['y_titulo'],
+                    data: data['datos']['series']
+                    }] 
+        });
+};
+
+
+function graficarMap(data, render){
+     Highcharts.setOptions({
+        lang: {
+            decimalPoint: ',',
+            thousandsSep: '.'
+        },
+    });
+                            
+     $('#'+render+'').highcharts('Map', {
+        
+        title : {
+            text : data['datos']['titulo'],
+        },
+
+        subtitle : {
+            text : data['datos']['subtitulo'] 
+        },
+        
+        colors: ['#2f7ed8', '#0d233a', '#8bbc21', '#910000', '#1aadce', '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],                   
+
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+
+        colorAxis: {
+            min: 0
+        },
+        
+        tooltip: {
+            valueSuffix: ' '+data['datos']['ayuda'],
+        },
+
+        series : [{
+            data : data['datos']['series'],
+            mapData: Highcharts.maps['municipio/altagracia'],
+            joinBy: ['descripcio','hc-key'],
+            name:  data['datos']['y_titulo'],
+            states: {
+                hover: {
+                    color: '#BADA55'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
+    });
+};
+
+</script>

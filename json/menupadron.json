@@ -1,0 +1,11 @@
+{'data' : 
+	{'padron':[
+		{'id':1,'reporte':'Fred','descripcion':'a guy'},
+		{'id':2,'reporte':'sue','descripcion':'a girl'}
+		],
+	 'recaudaciones':[
+		{'id':1,'reporte':'Fresssd','descripcion':'a guy'},
+		{'id':2,'reporte':'susse','descripcion':'a girl'}
+		],
+	}
+}

@@ -1,0 +1,22 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Reportes
+ * Tabla querys
+ * listado de Reportes
+ *
+ * @author Remberto Quispe Gutierrez <rembertoy2k3@gmail.com>
+ * @see AppModel
+ */
+class Reportes extends AppModel {
+      public $name = 'Reportes';        
+      public $useTable = 'querys';
+      public $primaryKey = 'id';
+}
+
+?>

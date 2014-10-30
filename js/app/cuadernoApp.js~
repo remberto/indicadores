@@ -1,0 +1,114 @@
+var cuadernoApp = angular.module('cuadernoApp', ['ngRoute',
+                                                 'cuadernoAppServices',
+                                                 'estudiantesControllers']);
+
+var cuadernoAppServices = angular.module('cuadernoAppServices', ['ngResource']);
+
+var estudiantesController = angular.module('estudiantesControllers',[]);
+
+
+
+cuadernoAppServices.factory('EstudiantesFactory', function ($resource) {
+    return $resource('/index.php/estudiantes.json', {}, {
+        query: { method: 'GET', isArray: false},
+        create: { method: 'POST' }
+    })
+    /*return $resource('http://localhost:8080/Estudiante', {}, {
+        query: { method: 'GET', isArray: false},
+        create: { method: 'POST' }
+    })*/
+});
+
+cuadernoAppServices.factory('EstudianteFactory', function ($resource) {
+    return $resource('/index.php/estudiantes/:id.json', {}, {
+        //show: { method: 'GET' },
+        update: { method: 'PUT', params: {id: '@id'} },
+        delete: { method: 'GET', params: {id: '@id'} }
+    })
+});
+
+/*cuadernoApp.service('dataService', function($resource) {
+delete $resource.defaults.headers.common['X-Requested-With'];
+this.getData = function(callbackFunc) {
+    $http({
+        method: 'GET',
+        url: 'http://127.0.0.1:54007/index.php/estudiantes/listar.json',
+        //params: 'limit=10, sort_by=created:desc',
+        //headers: {'Authorization': 'Token token=xxxxYYYYZzzz'}
+     }).success(function(data){
+        // With the data succesfully returned, call our callback
+        callbackFunc(data);
+    }).error(function(){
+        alert("error");
+    });
+ }
+});*/
+
+cuadernoApp.config(function($routeProvider) {
+		$routeProvider
+
+			// route for the home page
+			.when('/', {
+				templateUrl : 'main.html',
+				controller  : 'mainController'
+			})
+            .when('/home', {
+                templateUrl : 'pages/index.html',
+                controller  : 'homeController'
+            })
+
+			// route for the about page
+/*			.when('/about', {
+				templateUrl : 'pages/about.html',
+				controller  : 'aboutController'
+			})
+*/
+			// route for the contact page
+/*			.when('/contact', {
+				templateUrl : 'pages/contact.html',
+				controller  : 'contactController'
+			}) 
+*/
+                        // route for the contact page
+			.when('/filiacion', {
+				templateUrl : 'estudiante/list.html',
+				controller  : 'estudiantesController'
+			})
+                        // Nuevo Estudiante
+            .when('/usuarios', {
+				templateUrl : 'usuario/index.html',
+				controller  : 'usuarioController'
+			})
+            .when('/filiacion', {
+                templateUrl : 'estudiante/list.html',
+                controller  : 'estudiantesController'
+            });
+	});
+
+cuadernoApp.controller('mainController', function($scope) {
+	// create a message to display in our view
+	$scope.message = 'Everyone come and see how good I look!';
+});
+
+estudiantesController.controller('estudiantesController', ['$scope','EstudiantesFactory','EstudianteFactory','$location', function($scope, EstudiantesFactory, EstudianteFactory, $location) {
+    $scope.estudiantes = null;
+
+    $scope.addEstudiante = function(){
+	   $location.path('/addEstudiante');
+    };
+
+    $scope.deleteEstudiante = function(estudianteId){
+	   EstudianteFactory.delete({id: estudianteId});
+	   EstudiantesFactory.query(function(data){$scope.estudiantes = data.estudiantes;});
+    };
+    
+    EstudiantesFactory.query(function(data){$scope.estudiantes = data.estudiantes;});
+}]);
+
+estudiantesController.controller('estudianteController', ['$scope','EstudiantesFactory','$location', function($scope, EstudiantesFactory, $location) {
+
+    $scope.newEstudiante = function(){
+        EstudiantesFactory.create($scope.estudiante);
+        $location.path('/filiacion');
+    };
+}]);
